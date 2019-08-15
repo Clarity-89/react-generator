@@ -1,0 +1,29 @@
+import React, { {{{ type }}} }  from 'react';
+import PropTypes from 'prop-types';
+import { msg } from "../../../translations/components/Message";
+import messages from "./messages";
+
+/**
+*
+* {{ properCase name }}
+*
+*/
+class {{ properCase name }} extends {{{ type }}} {
+    static propTypes = {}
+
+    constructor(props) {
+        super(props);
+
+        this.state = {};
+    }
+
+    render() {
+        return (
+          <div>
+            {{ properCase name }}
+          </div>
+        );
+    }
+}
+
+export default {{ properCase name }};
