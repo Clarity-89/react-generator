@@ -18,5 +18,5 @@ module.exports = function(plop) {
     plop.setHelper("lowerCase", function(text) {
         return text.toLowerCase();
     });
-    plop.setGenerator("component", componentGenerator);
+    plop.setGenerator("component", config);
 };

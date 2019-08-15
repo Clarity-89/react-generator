@@ -1,5 +1,4 @@
 const listComponents = require("./listComponents");
-const listApps = require("./listApps");
 
 /**
  * Generate React component for an app
@@ -8,15 +7,7 @@ const listApps = require("./listApps");
 module.exports = {
     description: "Generate a new React component",
     prompts: [
-        {
-            type: "list",
-            name: "app",
-            message: "Select app to add Component to",
-            choices: listApps("app"),
-            default: "shop",
-            filter: val => val.toLowerCase()
-        },
-        {
+      {
             type: "list",
             name: "action",
             message: "Select action",
