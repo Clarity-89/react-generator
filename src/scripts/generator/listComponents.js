@@ -1,9 +1,9 @@
 const fs = require("fs");
 const path = require("path");
 
-module.exports = app => {
+module.exports = () => {
     const names = fs.readdirSync(
-        path.join(__dirname, `../../${app}/components`)
+        path.join(__dirname, `../../components`)
     );
-    return names.filter(name => name !== ".DS_Store");
+    return names//.filter(name => name !== ".DS_Store");
 };

@@ -29,7 +29,7 @@ module.exports = {
             name: "component",
             message: "Select component",
             when: answer => answer.action === "add",
-            choices: answers => listComponents(answers.app),
+            choices: listComponents,
             filter: val => val.toLowerCase()
         },
         {
