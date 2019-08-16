@@ -1,5 +1,5 @@
 const listComponents = require("./listComponents");
-const componentsPath = "../../components/";
+const componentsPath = "../../components";
 
 /**
  * Generate React component for an app
@@ -14,13 +14,11 @@ module.exports = {
       message: "Select action",
       choices: () => [
         {
-          name:
-            "Create (Create component folder with Component.js and index.js files)",
+          name: "Create component folder",
           value: "create"
         },
         {
-          name:
-            "Add (Add new Component.js file inside of existing component folder)",
+          name: "Add separate component",
           value: "add"
         }
       ]
@@ -30,7 +28,7 @@ module.exports = {
       name: "component",
       message: "Select component",
       when: answer => answer.action === "add",
-      choices: listComponents,
+      choices: listComponents(),
       filter: value => value.toLowerCase()
     },
     {
@@ -49,28 +47,24 @@ module.exports = {
       name: "type",
       message: "Select component type",
       default: "Functional component",
-      choices: () => [
-        "Functional component",
-        "Class Based Component",
-        "Pure Component"
-      ]
+      choices: () => ["Functional component", "Class Based Component"]
     }
   ],
   actions: data => {
     let template = "./templates/class.js.hbs";
     let actions = [];
-    let path = "../../components/{{properCase name}}/{{properCase name}}.js";
+    let path = `${componentsPath}/{{properCase name}}/{{properCase name}}.js`;
 
-    if (data.type === "Stateless Function") {
+    if (data.type === "Functional component") {
       template = "./templates/functional.js.hbs";
     }
 
     if (data.action === "add") {
-      path = `../../components/{{properCase component}}/{{properCase name}}.js`;
+      path = `${componentsPath}/{{properCase component}}/{{properCase name}}.js`;
       actions = [
         {
           type: "append",
-          path: "../../{{app}}/components/{{properCase component}}/index.js",
+          path: `${componentsPath}/{{properCase component}}/index.js`,
           templateFile: "./templates/index.js.hbs"
         }
       ];
@@ -90,13 +84,8 @@ module.exports = {
         ...actions,
         {
           type: "add",
-          path: "../../{{app}}/components/{{properCase name}}/index.js",
+          path: `${componentsPath}/{{properCase name}}/index.js`,
           templateFile: "./templates/index.js.hbs"
-        },
-        {
-          type: "add",
-          path: "../../{{app}}/components/{{properCase name}}/messages.js",
-          templateFile: "./templates/messages.js.hbs"
         }
       ];
     }
