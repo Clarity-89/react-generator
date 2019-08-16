@@ -25,11 +25,10 @@ module.exports = {
     },
     {
       type: "list",
-      name: "component",
+      name: "dir",
       message: "Select component",
       when: answer => answer.action === "add",
-      choices: listComponents(),
-      filter: value => value.toLowerCase()
+      choices: listComponents
     },
     {
       type: "input",
@@ -46,36 +45,20 @@ module.exports = {
       type: "list",
       name: "type",
       message: "Select component type",
-      default: "Functional component",
-      choices: () => ["Functional component", "Class Based Component"]
+      default: "functional",
+      choices: () => [
+        { name: "Functional component", value: "functional" },
+        { name: "Class Based Component", value: "class" }
+      ]
     }
   ],
   actions: data => {
-    let template = "./templates/class.js.hbs";
-    let actions = [];
-    let path = `${componentsPath}/{{properCase name}}/{{properCase name}}.js`;
-
-    if (data.type === "Functional component") {
-      template = "./templates/functional.js.hbs";
-    }
-
-    if (data.action === "add") {
-      path = `${componentsPath}/{{properCase component}}/{{properCase name}}.js`;
-      actions = [
-        {
-          type: "append",
-          path: `${componentsPath}/{{properCase component}}/index.js`,
-          templateFile: "./templates/index.js.hbs"
-        }
-      ];
-    }
-
-    actions = [
-      ...actions,
+    const fileType = data.action === "add" ? "dir" : "properCase name";
+    let actions = [
       {
         type: "add",
-        path: path,
-        templateFile: template
+        path: `${componentsPath}/{{${fileType}}}/{{properCase name}}.js`,
+        templateFile: "./templates/{{type}}.js.hbs"
       }
     ];
 
@@ -85,6 +68,17 @@ module.exports = {
         {
           type: "add",
           path: `${componentsPath}/{{properCase name}}/index.js`,
+          templateFile: "./templates/index.js.hbs"
+        }
+      ];
+    }
+
+    if (data.action === "add") {
+      actions = [
+        ...actions,
+        {
+          type: "append",
+          path: `${componentsPath}/{{dir}}/index.js`,
           templateFile: "./templates/index.js.hbs"
         }
       ];
