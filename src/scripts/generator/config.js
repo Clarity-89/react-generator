@@ -53,7 +53,7 @@ module.exports = {
     }
   ],
   actions: data => {
-    const fileType = data.action === "add" ? "dir" : "properCase name";
+    const fileType = data.action === "create" ? "properCase name" : "dir";
     let actions = [
       {
         type: "add",
