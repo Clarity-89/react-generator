@@ -53,11 +53,11 @@ module.exports = {
     }
   ],
   actions: data => {
-    const fileType = data.action === "create" ? "properCase name" : "dir";
+    const target = data.action === "create" ? "properCase name" : "dir";
     let actions = [
       {
         type: "add",
-        path: `${componentsPath}/{{${fileType}}}/{{properCase name}}.js`,
+        path: `${componentsPath}/{{${target}}}/{{properCase name}}.js`,
         templateFile: "./templates/{{type}}.js.hbs"
       }
     ];
