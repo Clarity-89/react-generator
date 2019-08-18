@@ -1,5 +1,5 @@
 const listComponents = require("./listComponents");
-const componentsPath = "../../components";
+const { reactConfig } = require("./config/react");
 
 /**
  * Generate React component for an app
@@ -53,37 +53,6 @@ module.exports = {
     }
   ],
   actions: data => {
-    const target = data.action === "create" ? "properCase name" : "dir";
-    let actions = [
-      {
-        type: "add",
-        path: `${componentsPath}/{{${target}}}/{{properCase name}}.js`,
-        templateFile: "./templates/{{type}}.js.hbs"
-      }
-    ];
-
-    if (data.action === "create") {
-      actions = [
-        ...actions,
-        {
-          type: "add",
-          path: `${componentsPath}/{{properCase name}}/index.js`,
-          templateFile: "./templates/index.js.hbs"
-        }
-      ];
-    }
-
-    if (data.action === "add") {
-      actions = [
-        ...actions,
-        {
-          type: "append",
-          path: `${componentsPath}/{{dir}}/index.js`,
-          templateFile: "./templates/index.js.hbs"
-        }
-      ];
-    }
-
-    return actions;
+    return reactConfig(data);
   }
 };
