@@ -65,18 +65,21 @@ exports.reduxConfig = data => {
     ];
 
     if (data.reducer_confirm) {
-      actions.push({
-        type: actionType,
-        path: reducerPath,
-        pattern: /import {/,
-        templateFile: `${reduxTemplates}/modify/actionImports.js.hbs`
-      });
-      actions.push({
-        type: "modify",
-        path: reducerPath,
-        pattern: /\/\/plopImport/,
-        templateFile: `${reduxTemplates}/modify/reducer.js.hbs`
-      });
+      actions = [
+        ...actions,
+        {
+          type: actionType,
+          path: reducerPath,
+          pattern: /import {/,
+          templateFile: `${reduxTemplates}/modify/actionImports.js.hbs`
+        },
+        {
+          type: "modify",
+          path: reducerPath,
+          pattern: /\/\/plopImport/,
+          templateFile: `${reduxTemplates}/modify/reducer.js.hbs`
+        }
+      ];
     }
   }
 

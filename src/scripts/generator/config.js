@@ -87,8 +87,7 @@ module.exports = {
       when: ({ select, create_or_modify }) => {
         return select === "redux_action" && create_or_modify === "modify";
       },
-      choices: listComponents("actions"),
-      filter: value => value.toLowerCase()
+      choices: listComponents("actions")
     },
     {
       type: "input",
