@@ -1,6 +1,6 @@
 const listComponents = require("./listComponents");
 const { reactConfig } = require("./config/react");
-
+const { reduxConfig } = require("./config/redux");
 /**
  * Generate React component for an app
  */
@@ -21,6 +21,7 @@ module.exports = {
       type: "list",
       name: "action",
       message: "Select action",
+      when: answer => answer.select === "react_component",
       choices: () => [
         {
           name: "Create component folder",
@@ -36,13 +37,15 @@ module.exports = {
       type: "list",
       name: "dir",
       message: "Select component",
-      when: answer => answer.action === "add",
+      when: ({ action, select }) =>
+        action === "add" && select === "react_component",
       choices: listComponents
     },
     {
       type: "input",
       name: "name",
       message: "Component name:",
+      when: answer => answer.select === "react_component",
       validate: value => {
         if (!value) {
           return "Component name is required";
@@ -55,6 +58,7 @@ module.exports = {
       name: "type",
       message: "Select component type",
       default: "functional",
+      when: answer => answer.select === "react_component",
       choices: () => [
         { name: "Functional component", value: "functional" },
         { name: "Class Based Component", value: "class" }
@@ -89,7 +93,7 @@ module.exports = {
     {
       type: "input",
       name: "action_prefix",
-      message: "Action prefix (e.g. 'post', 'user'):",
+      message: "Action prefix (e.g. 'user'):",
       when: ({ select, create_or_modify }) =>
         select === "redux_action" && create_or_modify === "create",
       validate: value => {
@@ -132,6 +136,8 @@ module.exports = {
     }
   ],
   actions: data => {
-    return reactConfig(data);
+    return data.select === "react_component"
+      ? reactConfig(data)
+      : reduxConfig(data);
   }
 };

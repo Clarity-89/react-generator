@@ -1,0 +1,17 @@
+import {
+    {{constantCase action_name}}_BEGIN,
+    {{constantCase action_name}}_SUCCESS,
+    {{constantCase action_name}}_ERROR
+} from "../actions/actionTypes";
+
+import initialState from "./initialState";
+
+export default function(state = initialState.{{camelCase action_name}}, action) {
+    switch (action.type) {
+        case {{constantCase action_name}}_BEGIN:
+        case {{constantCase action_name}}_SUCCESS:
+        case {{constantCase action_name}}_ERROR:
+            return state;
+    //plopImport
+    }
+}

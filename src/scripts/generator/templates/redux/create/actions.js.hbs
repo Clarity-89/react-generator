@@ -1,0 +1,20 @@
+import {
+    {{constantCase action_name}}_BEGIN,
+    {{constantCase action_name}}_SUCCESS,
+    {{constantCase action_name}}_ERROR
+} from './actionTypes';
+
+export const {{camelCase action_name}}Begin = payload => ({
+    type: {{constantCase action_name}}_BEGIN,
+    payload
+});
+
+export const {{camelCase action_name}}Success = payload => ({
+    type: {{constantCase action_name}}_SUCCESS,
+    payload
+});
+
+export const {{camelCase action_name}}Error = payload => ({
+    type: {{constantCase action_name}}_ERROR,
+    payload
+});
