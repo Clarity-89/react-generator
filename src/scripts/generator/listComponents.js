@@ -1,6 +1,6 @@
 const fs = require("fs");
-const path = require("path");
 
-module.exports = () => {
-  return fs.readdirSync(path.join(__dirname, `../../components`));
+module.exports = (type = "components") => {
+  const names = fs.readdirSync("src/" + type);
+  return names.map(i => i.replace(".js", ""));
 };
