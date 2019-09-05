@@ -1,6 +1,10 @@
 const fs = require("fs");
 
 module.exports = (type = "components") => {
-  const names = fs.readdirSync("src/" + type);
-  return names.map(i => i.replace(".js", ""));
+  try {
+    const names = fs.readdirSync("src/" + type);
+    return names.map(i => i.replace(".js", ""));
+  } catch (e) {
+    console.error(e);
+  }
 };
