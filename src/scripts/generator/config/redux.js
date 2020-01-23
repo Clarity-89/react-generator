@@ -40,7 +40,7 @@ exports.reduxConfig = data => {
           type: "modify",
           path: `${dirPath}/reducers/rootReducer.js`,
           pattern: /\/\/plopReducer/,
-          template: ",{{action_prefix}}\n//plopReducer"
+          template: "{{action_prefix}},\n//plopReducer"
         }
       ];
     }
