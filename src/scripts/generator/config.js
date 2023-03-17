@@ -6,7 +6,7 @@ const { reduxConfig } = require("./config/redux");
  */
 
 module.exports = {
-  description: "Generate a new React component",
+  description: "Generate new React component or Redux action",
   prompts: [
     {
       type: "list",
